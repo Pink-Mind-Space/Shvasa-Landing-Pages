@@ -1,0 +1,743 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Shvasa One Referral PRD</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap">
+<style>
+/* Layout: light editorial PRD. Full-width bands alternate white and soft grey. Three drawings carry the story: journey, ladder (solid dark panel), per-friend timers. Brand rule: red only on links, yellow/amber for highlights. */
+:root {
+  --bg: #FFFFFF; --soft: #F4F6F5; --ink: #141616; --grey: #545A58; --line: #E3E7E5;
+  --amber: #C77000; --amber-eyebrow: #B45F00; --yellow: #FEA500;
+  --red: #E8374A; --red-hover: #C92A3C;
+  --panel: #0E0F0F; --panel-ink: #F2F4F3; --panel-grey: #A9B0AD; --panel-line: #2B302E;
+  --blue: #5AA9FF; --violet: #A78BFA;
+  --tint-amber: #FFF1D1; --tint-blue: #E4F0FF; --tint-violet: #EEE9FF;
+  --f-head: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+  --f-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E0F0F; --soft: #171A19; --ink: #F2F4F3; --grey: #A9B0AD; --line: #2B302E;
+    --amber: #FEA500; --amber-eyebrow: #FEA500;
+    --red: #FF6B7A; --red-hover: #FF8C98;
+    --panel: #1C201F; --panel-line: #343A38;
+    --tint-amber: #2D2310; --tint-blue: #14222F; --tint-violet: #211C33;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E0F0F; --soft: #171A19; --ink: #F2F4F3; --grey: #A9B0AD; --line: #2B302E;
+  --amber: #FEA500; --amber-eyebrow: #FEA500;
+  --red: #FF6B7A; --red-hover: #FF8C98;
+  --panel: #1C201F; --panel-line: #343A38;
+  --tint-amber: #2D2310; --tint-blue: #14222F; --tint-violet: #211C33;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: auto; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6; }
+h1, h2, h3, h4 { font-family: var(--f-head); line-height: 1.15; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: var(--red); text-decoration: underline; text-underline-offset: 3px; }
+a:hover { color: var(--red-hover); }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; border-radius: 4px; }
+.hl { color: var(--amber); }
+.mk { background: linear-gradient(#FFDD57, #FFB22E); color: #0E0F0F; padding: 0 .3em; border-radius: 3px; -webkit-box-decoration-break: clone; box-decoration-break: clone; font-weight: 500; }
+.eyebrow { font: 600 12px/1.2 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--amber-eyebrow); }
+.small { font-size: 14px; color: var(--grey); }
+
+.band { background: var(--bg); padding-block: 64px; }
+.band.soft { background: var(--soft); }
+.wrap { max-width: 1040px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.sec-head { display: grid; gap: 10px; margin-bottom: 32px; max-width: 62ch; }
+.sec-head h2 { font-size: clamp(26px, 3.6vw, 36px); font-weight: 700; }
+.sec-head p { color: var(--grey); font-size: 17px; }
+
+/* hero */
+.hero { padding-block: 56px 48px; }
+.hero h1 { font-size: clamp(34px, 6vw, 58px); font-weight: 700; margin-top: 14px; }
+.hero .lead { font-size: clamp(17px, 2vw, 20px); max-width: 60ch; margin-top: 18px; color: var(--grey); }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.chip { font-size: 13px; font-weight: 500; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--grey); }
+.chip.draft { background: var(--tint-amber); border-color: transparent; color: var(--ink); }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 36px; }
+.tile { background: var(--soft); border-radius: 16px; padding: 22px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.tile .big { font: 700 clamp(34px, 5vw, 46px)/1 var(--f-head); color: var(--amber); }
+.tile .what { font-weight: 600; }
+.nav { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 32px; font-size: 14px; font-weight: 500; }
+
+/* diagrams */
+figure { margin: 0; }
+figcaption { margin-top: 14px; font-size: 14px; color: var(--grey); max-width: 70ch; }
+.scroll-x { overflow-x: auto; }
+.diagram { display: block; width: 100%; min-width: 700px; height: auto; font-family: var(--f-body); }
+.diagram .lane { fill: var(--soft); }
+.band.soft .diagram .lane { fill: var(--bg); }
+.diagram .node { fill: var(--bg); stroke: var(--line); stroke-width: 1.5; }
+.band.soft .diagram .node { fill: var(--soft); stroke: var(--grey); stroke-opacity: .5; }
+.diagram .node-key { fill: var(--tint-amber); stroke: var(--yellow); stroke-width: 2; }
+.diagram .dia { fill: var(--bg); stroke: var(--grey); stroke-opacity: .6; stroke-width: 1.5; }
+.band.soft .diagram .dia { fill: var(--soft); }
+.diagram .edge { stroke: var(--grey); stroke-width: 1.5; fill: none; }
+.diagram .arrowhead { fill: var(--grey); }
+.diagram .t { fill: var(--ink); font-size: 13.5px; font-weight: 600; }
+.diagram .s { fill: var(--grey); font-size: 12px; }
+.diagram .lane-label { fill: var(--grey); font-size: 11px; font-weight: 600; letter-spacing: .12em; }
+.diagram .tag { fill: var(--grey); font-size: 12px; font-weight: 500; }
+
+.panel { background: var(--panel); color: var(--panel-ink); border-radius: 20px; padding: clamp(20px, 4vw, 36px); }
+.panel .scroll-x { margin-top: 4px; }
+.panel .diagram { min-width: 640px; }
+.panel .diagram .pt { fill: var(--panel-ink); font-size: 16px; font-weight: 600; font-family: var(--f-head); }
+.panel .diagram .pn { fill: #0E0F0F; font-size: 20px; font-weight: 700; font-family: var(--f-head); }
+.panel .diagram .pa { fill: #FEA500; font-size: 16px; font-weight: 600; font-family: var(--f-head); }
+.panel .diagram .ps { fill: var(--panel-grey); font-size: 12.5px; font-weight: 500; }
+.panel .diagram .pline { stroke: var(--panel-line); stroke-width: 2; }
+.panel .diagram .pbr { stroke: var(--panel-grey); stroke-width: 1.5; fill: none; }
+.panel-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px 28px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--panel-line); color: var(--panel-ink); font-size: 15px; }
+.panel-notes p { min-width: 0; }
+.panel-notes .flag { color: var(--panel-grey); }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 14px; font-size: 14px; color: var(--grey); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.sw { display: inline-block; flex: none; }
+.sw-bar { width: 26px; height: 12px; border-radius: 6px; background: var(--tint-blue); border: 1.5px solid var(--blue); }
+.sw-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--yellow); }
+.sw-ring { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--grey); }
+.diagram .bar { fill: var(--tint-blue); stroke: var(--blue); stroke-width: 1.5; }
+.diagram .dot { fill: var(--yellow); }
+.diagram .ring { fill: var(--bg); stroke: var(--grey); stroke-width: 2; }
+.diagram .dash { stroke: var(--grey); stroke-width: 1.5; stroke-dasharray: 4 4; fill: none; }
+.diagram .grid { stroke: var(--line); stroke-width: 1; }
+.diagram .axis { fill: var(--grey); font-size: 12px; font-weight: 500; }
+
+/* cards */
+.grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+.card { background: var(--soft); border-radius: 16px; padding: 22px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.band.soft .card { background: var(--bg); border: 1px solid var(--line); }
+.card .label { font: 600 11.5px/1.2 var(--f-body); letter-spacing: .1em; text-transform: uppercase; color: var(--grey); }
+.card h3 { font-size: 19px; font-weight: 600; }
+.card p { font-size: 15.5px; }
+.strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px 28px; margin-top: 20px; padding: 18px 22px; border: 1px dashed var(--grey); border-radius: 14px; font-size: 15px; }
+.strip strong { font-weight: 600; }
+
+/* table */
+.tbl { overflow-x: auto; margin-top: 36px; }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 15px; }
+th { text-align: left; font: 600 11.5px/1.2 var(--f-body); letter-spacing: .1em; text-transform: uppercase; color: var(--grey); padding: 0 16px 12px 0; border-bottom: 2px solid var(--ink); }
+td { padding: 14px 16px 14px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+td:first-child { font-weight: 600; width: 24%; }
+.tbl h3 { font-size: 20px; margin-bottom: 16px; }
+
+/* requirements */
+.req { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.req li { display: grid; grid-template-columns: 52px 1fr; gap: 10px; font-size: 15px; align-items: start; }
+.req .fr { font: 600 12px/1.9 var(--f-head); color: var(--amber-eyebrow); }
+.req .prop { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--tint-amber); color: var(--ink); }
+.req-card h3 { font-size: 20px; margin-bottom: 6px; }
+
+/* measure */
+.measure { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 20px; align-items: start; }
+.target { background: var(--panel); color: var(--panel-ink); border-radius: 18px; padding: 28px; display: grid; gap: 8px; }
+.target .big { font: 700 clamp(44px, 7vw, 64px)/1 var(--f-head); color: var(--yellow); }
+.target p { color: var(--panel-ink); }
+.target .small { color: var(--panel-grey); }
+.tracked { display: grid; gap: 0; }
+.tracked div { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.tracked div span:last-child { color: var(--grey); text-align: right; flex: none; }
+.exp-title { font-size: 20px; margin: 44px 0 16px; }
+.chips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.xp { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 4px; min-width: 0; }
+.xp .label { font: 600 11px/1.2 var(--f-body); letter-spacing: .1em; text-transform: uppercase; color: var(--grey); }
+.xp .val { font-weight: 600; font-size: 15px; }
+
+/* decisions */
+.dcard .num { font: 700 13px/1 var(--f-head); color: var(--amber-eyebrow); }
+details { margin-top: 28px; border: 1px solid var(--line); border-radius: 16px; background: var(--bg); }
+summary { cursor: pointer; padding: 18px 22px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font: 600 22px/1 var(--f-head); color: var(--amber-eyebrow); }
+details[open] summary::after { content: "\2212"; }
+.all { padding: 4px 22px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px 32px; }
+.all h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--amber-eyebrow); letter-spacing: .06em; text-transform: uppercase; font-family: var(--f-body); }
+.all ol { margin: 0; padding-left: 28px; display: grid; gap: 8px; font-size: 14.5px; }
+.vk { columns: 2 320px; column-gap: 40px; margin: 0; padding-left: 24px; font-size: 15.5px; }
+.vk li { break-inside: avoid; padding-bottom: 10px; padding-left: 4px; }
+.vk li::marker { font-weight: 600; color: var(--amber-eyebrow); }
+
+.refs { display: grid; gap: 10px; font-size: 15px; max-width: 78ch; }
+.refs p { margin: 0; }
+footer { color: var(--grey); font-size: 14px; padding-bottom: 48px; }
+
+.steps { margin: 0; padding-left: 22px; display: grid; gap: 7px; font-size: 15px; }
+.out { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 4px; display: grid; gap: 6px; font-size: 14.5px; }
+.out b { font-weight: 600; }
+table.rules td:first-child { width: 56px; color: var(--amber-eyebrow); font-family: var(--f-head); }
+table.rules tr.grp td { padding: 26px 0 8px; border-bottom: 2px solid var(--ink); font: 600 11.5px/1.2 var(--f-body); letter-spacing: .1em; text-transform: uppercase; color: var(--grey); width: auto; }
+table.rules tr.grp:first-child td { padding-top: 6px; }
+.path-label { font: 600 11.5px/1.2 var(--f-body); letter-spacing: .1em; text-transform: uppercase; color: var(--amber-eyebrow); }
+
+@media (max-width: 760px) {
+  .band { padding-block: 48px; }
+  .measure { grid-template-columns: minmax(0, 1fr); }
+  .req li { grid-template-columns: 46px 1fr; }
+}
+</style>
+
+<header class="band hero">
+  <div class="wrap">
+    <div class="eyebrow">Product requirements and user flows</div>
+    <h1>Shvasa One <span class="hl">Referral System</span></h1>
+    <p class="lead">Every Shvasa user has one personal link that never expires. When a friend buys Shvasa One 3-month or annual through it, both get free Shvasa One time once the 5-day money-back period is over.</p>
+    <div class="meta">
+      <span class="chip draft">Meeting walkthrough version</span>
+      <span class="chip">5 November 2026</span>
+      <span class="chip">Referrer = member who shares. Friend = person who joins.</span>
+    </div>
+    <div class="tiles">
+      <div class="tile"><div class="big">10,000</div><div class="what">Shvasa One subscriptions in 3 months</div><div class="small">Target across all channels, from anywhere.</div></div>
+      <div class="tile"><div class="big">2 wks / 1 mo</div><div class="what">For both sides, every referral</div><div class="small">2 weeks on a 3-month plan, 1 month on annual.</div></div>
+      <div class="tile"><div class="big">Day 6</div><div class="what">When rewards are given</div><div class="small">After the 5-day money-back period.</div></div>
+    </div>
+    <nav class="nav" aria-label="On this page">
+      <a href="#how">At a glance</a><a href="#terms">Key terms</a><a href="#rules">Rules</a><a href="#paths">Paths</a><a href="#claim">Claiming</a><a href="#examples">Examples</a><a href="#edges">Edge cases</a><a href="#requirements">What to build</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="band soft" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Overview</div>
+      <h2>The system <span class="hl">at a glance</span></h2>
+      <p>Everyone shares the same personal link. The reward comes after the friend's 5-day money-back period.</p>
+    </div>
+    <figure>
+      <div class="scroll-x">
+      <svg class="diagram" viewBox="0 0 820 416" role="img" aria-label="A friend opens a link, enters their mobile number, buys Shvasa One, and after the 5-day refund window the friend's plan is extended and the referrer gets a reward in their account; a refund inside the window means no reward">
+        <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arrowhead"/></marker></defs>
+        <rect class="lane" x="16" y="44" width="788" height="112" rx="14"/>
+        <rect class="lane" x="16" y="172" width="788" height="228" rx="14"/>
+        <text class="lane-label" x="34" y="66">REFERRER</text>
+        <text class="lane-label" x="34" y="194">FRIEND</text>
+
+        <path class="edge" d="M94 128V210" marker-end="url(#a1)"/>
+        <path class="edge" d="M164 240H186" marker-end="url(#a1)"/>
+        <path class="edge" d="M328 240H350" marker-end="url(#a1)"/>
+        <path class="edge" d="M492 240H504" marker-end="url(#a1)"/>
+        <path class="edge" d="M626 240H638" marker-end="url(#a1)"/>
+        <path class="edge" d="M718 212V130" marker-end="url(#a1)"/>
+        <path class="edge" d="M566 284V330" marker-end="url(#a1)"/>
+
+        <rect class="node" x="24" y="72" width="140" height="56" rx="10"/>
+        <text class="t" x="94" y="97" text-anchor="middle">Shares link</text>
+        <text class="s" x="94" y="114" text-anchor="middle">never expires</text>
+
+        <rect class="node" x="24" y="212" width="140" height="56" rx="10"/>
+        <text class="t" x="94" y="237" text-anchor="middle">Opens the link</text>
+        <text class="s" x="94" y="254" text-anchor="middle">sees who referred</text>
+
+        <rect class="node" x="188" y="212" width="140" height="56" rx="10"/>
+        <text class="t" x="258" y="237" text-anchor="middle">Enters mobile</text>
+        <text class="s" x="258" y="254" text-anchor="middle">not for paid members</text>
+
+        <rect class="node" x="352" y="212" width="140" height="56" rx="10"/>
+        <text class="t" x="422" y="237" text-anchor="middle">Buys a plan</text>
+        <text class="s" x="422" y="254" text-anchor="middle">3-month or annual</text>
+
+        <polygon class="dia" points="506,240 566,196 626,240 566,284"/>
+        <text class="t" x="566" y="236" text-anchor="middle">Refund in</text>
+        <text class="t" x="566" y="253" text-anchor="middle">5 days?</text>
+        <text class="tag" x="632" y="230" text-anchor="middle">no</text>
+        <text class="tag" x="578" y="313">yes</text>
+
+        <rect class="node-key" x="640" y="212" width="156" height="56" rx="10"/>
+        <text class="t" x="718" y="237" text-anchor="middle">Plan extended</text>
+        <text class="s" x="718" y="254" text-anchor="middle">with Shvasa One credit</text>
+
+        <rect class="node-key" x="640" y="72" width="156" height="56" rx="10"/>
+        <text class="t" x="718" y="97" text-anchor="middle">Reward in account</text>
+        <text class="s" x="718" y="114" text-anchor="middle">claim anytime</text>
+        <text class="tag" x="730" y="176">day 6</text>
+
+        <rect class="node" x="466" y="332" width="200" height="56" rx="10"/>
+        <text class="t" x="566" y="357" text-anchor="middle">No reward for either</text>
+        <text class="s" x="566" y="374" text-anchor="middle">refunded inside the window</text>
+      </svg>
+      </div>
+      <figcaption>Everyone sees the same landing page, with "[Name] referred you" at the top. The mobile number check stops current paid members from being referred.</figcaption>
+    </figure>
+  </div>
+</section><section class="band" id="terms">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Key terms</div>
+      <h2>Words used <span class="hl">in this page</span></h2>
+      <p>Each term has one meaning. The rules and paths below use these words only in this sense.</p>
+    </div>
+    <div class="tbl" style="margin-top:0;">
+      <table>
+        <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td>Referrer</td><td>Any user who shares their personal link. Paid, free-trial and lapsed users can all be referrers.</td></tr>
+          <tr><td>Friend</td><td>A person who opens a referrer's link and buys Shvasa One.</td></tr>
+          <tr><td>Personal link</td><td>The one link every user has. It opens the Shvasa One landing page and never expires.</td></tr>
+          <tr><td>Shvasa One</td><td>The self-checkout plan, sold as a 3-month plan and an annual plan.</td></tr>
+          <tr><td>Qualifying purchase</td><td>A Shvasa One 3-month or annual purchase made through a link.</td></tr>
+          <tr><td>Money-back period</td><td>The 5 days after a Shvasa One purchase in which it can be refunded. Refund terms: within 5 days of purchase, at least 2 classes attended, Rs 99 administration charge deducted.</td></tr>
+          <tr><td>Day 6</td><td>The first day after the money-back period. Rewards are given on this day. Day 1 is the day of purchase [to confirm].</td></tr>
+          <tr><td>Reward</td><td>Bonus Shvasa One time. 2 weeks for a 3-month plan, 1 month (30 days) for an annual plan. Friend and referrer get the same amount.</td></tr>
+          <tr><td>Unclaimed reward</td><td>A reward sitting in the referrer's account. It does nothing until the referrer taps Claim.</td></tr>
+          <tr><td>Paid member</td><td>A user with an active paid subscription of any kind.</td></tr>
+          <tr><td>Lapsed user</td><td>A user whose subscription has expired. There is no wait period before they can be a friend.</td></tr>
+          <tr><td>Primary subscription</td><td>The one subscription that holds a user's credits. A private plan also holds the user's group class credits.</td></tr>
+          <tr><td>Shvasa One credits</td><td>The class credits that come with Shvasa One. Credits decide which classes a user can book. Other features are open to all.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="band soft" id="rules">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The rules</div>
+      <h2>Every rule, <span class="hl">numbered</span></h2>
+      <p>Rules are numbered R1 to R19. The paths, examples and requirements below point back to them.</p>
+    </div>
+    <div class="tbl" style="margin-top:0;">
+      <table class="rules">
+        <thead><tr><th>#</th><th>Rule</th></tr></thead>
+        <tbody>
+          <tr class="grp"><td colspan="2">The referrer and the link</td></tr>
+          <tr><td>R1</td><td>Every user can be a referrer: paid, free trial or lapsed.</td></tr>
+          <tr><td>R2</td><td>The <strong>Refer and earn</strong> entry point is shown on the website (top left corner), in the app (Progress page) and on the mobile website. It is not shown to users outside India.</td></tr>
+          <tr><td>R3</td><td>Every user has exactly one personal link, created automatically. Nothing is generated. Any number of friends use it. It is meant to be shared publicly. <strong>It never expires.</strong> It can be switched off if it is misused [how: to confirm].</td></tr>
+          <tr class="grp"><td colspan="2">The friend</td></tr>
+          <tr><td>R4</td><td>Opening a link shows the Shvasa One landing page, with "[Name] referred you" at the top. Everyone sees the same page.</td></tr>
+          <tr><td>R5</td><td>Eligibility is checked when the friend enters their mobile number. A new account, a free-trial user and a lapsed user are eligible, with no wait. A paid member is not eligible and sees: "Sorry, looks like you already have an active subscription with us." (wording can change)</td></tr>
+          <tr><td>R6</td><td>Only a Shvasa One 3-month or annual purchase made through a link qualifies. No other purchase earns a reward.</td></tr>
+          <tr><td>R7</td><td>The purchase is credited to the referrer whose link was used at payment. If the friend opened links from several users, only the link used at payment counts.</td></tr>
+          <tr class="grp"><td colspan="2">The reward</td></tr>
+          <tr><td>R8</td><td>The plan the friend buys sets the reward: <strong>3-month = 2 weeks, annual = 1 month</strong> (30 days). The friend and the referrer get the same amount. Every referral earns the same. There is no ladder and no cap.</td></tr>
+          <tr><td>R9</td><td>Nothing is given when the friend pays. Rewards are given on <strong>day 6</strong>, after the 5-day money-back period, if the purchase was not refunded.</td></tr>
+          <tr><td>R10</td><td>The friend's reward is automatic. On day 6 the friend's plan is extended by the reward and Shvasa One credits are added.</td></tr>
+          <tr><td>R11</td><td>The referrer's reward is not automatic. On day 6 it is added to their account as an unclaimed reward. They claim it <strong>anytime</strong>. Each reward has its own Claim button. There is no bulk claim.</td></tr>
+          <tr><td>R12</td><td>When a reward is claimed, how it is applied depends on the claimer's status. See path 8.</td></tr>
+          <tr><td>R13</td><td>Every purchase has its own 5-day wait and its own day 6. Several friends buying close together produce rewards one after another.</td></tr>
+          <tr class="grp"><td colspan="2">When a reward is not given or is taken back</td></tr>
+          <tr><td>R14</td><td>If the friend refunds inside the 5 days, neither the friend nor the referrer gets a reward.</td></tr>
+          <tr><td>R15</td><td>After day 6, a chargeback or dispute does not remove a reward automatically. It is settled case by case.</td></tr>
+          <tr><td>R16</td><td>If the referrer's account is deleted or blocked before they claim, their unclaimed rewards are removed.</td></tr>
+          <tr class="grp"><td colspan="2">Everything else</td></tr>
+          <tr><td>R17</td><td>Referrers and friends are notified on WhatsApp through WATI. Lapsed users get WhatsApp messages too, since they may not open the app or even have it. [Events to notify: to be set]</td></tr>
+          <tr><td>R18</td><td>No sales outreach, no cap on referrals, and no expiry on the link or the offer. The team will experiment.</td></tr>
+          <tr class="grp"><td colspan="2">Stacking</td></tr>
+          <tr><td>R19</td><td>Rewards stack. A user can claim any number of rewards, one tap each. Each claim is applied by the user's status at that moment, so a later claim extends the plan that an earlier claim created or extended. There is no limit.<span class="prop" style="margin-left:6px;">Proposed</span> See the stacking table in the Claiming section.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="reward">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Rule R8, shown</div>
+      <h2>One reward for <span class="hl">every</span> referral</h2>
+      <p>The reward depends only on the plan the friend buys, and both sides get the same.</p>
+    </div>
+    <div class="panel">
+      <figure>
+        <div class="scroll-x">
+        <svg class="diagram" viewBox="0 0 820 176" role="img" aria-label="A 3-month plan earns 2 extra weeks and an annual plan earns 1 extra month, for the friend and for the referrer">
+          <text class="pt" x="0" y="63">3-month plan</text>
+          <rect x="230" y="44" width="108" height="28" rx="6" fill="#343A38"/>
+          <text class="ps" x="284" y="63" text-anchor="middle">3 months</text>
+          <rect x="342" y="44" width="17" height="28" rx="4" fill="#FEA500"/>
+          <text class="pa" x="372" y="64">+ 2 weeks</text>
+
+          <text class="pt" x="0" y="133">Annual plan</text>
+          <rect x="230" y="114" width="432" height="28" rx="6" fill="#343A38"/>
+          <text class="ps" x="446" y="133" text-anchor="middle">12 months</text>
+          <rect x="666" y="114" width="36" height="28" rx="4" fill="#FEA500"/>
+          <text class="pa" x="714" y="134">+ 1 month</text>
+        </svg>
+        </div>
+        <figcaption style="color: var(--panel-grey);">The amber block is the reward. It is added to the friend's plan and to the referrer's account. Bars are drawn to scale.</figcaption>
+      </figure>
+      <div class="panel-notes">
+        <p>Given on <strong>day 6</strong>, after the 5-day money-back period (R9).</p>
+        <p>Rewards from several friends come <strong>one after another</strong> (R13).</p>
+        <p>Referrer <strong>claims anytime</strong> on the referral page.</p>
+      </div>
+    </div>
+  </div>
+</section><section class="band soft" id="day6">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Rules R9 and R13, shown</div>
+      <h2>Five days, then <span class="hl">the reward</span></h2>
+      <p>Each purchase has its own 5-day wait. The reward is given on day 6 if the friend has not refunded.</p>
+    </div>
+    <figure>
+      <div class="scroll-x">
+      <svg class="diagram" viewBox="0 0 820 276" role="img" aria-label="Three friends buy on different days; each has a 5-day refund window, and the reward is given on the day after the window ends, so rewards arrive one after another">
+        <line class="grid" x1="160" y1="58" x2="160" y2="250"/>
+        <line class="grid" x1="370" y1="58" x2="370" y2="250"/>
+        <line class="grid" x1="580" y1="58" x2="580" y2="250"/>
+        <text class="axis" x="160" y="40" text-anchor="middle">Day 1</text>
+        <text class="axis" x="370" y="40" text-anchor="middle">Day 6</text>
+        <text class="axis" x="580" y="40" text-anchor="middle">Day 11</text>
+
+        <text class="t" x="24" y="104">Friend A</text>
+        <rect class="bar" x="160" y="89" width="210" height="22" rx="11"/>
+        <text class="s" x="174" y="104">buys day 1</text>
+        <circle class="dot" cx="391" cy="100" r="8"/>
+        <text class="s" x="391" y="132" text-anchor="middle">reward day 6</text>
+
+        <text class="t" x="24" y="174">Friend B</text>
+        <rect class="bar" x="244" y="159" width="210" height="22" rx="11"/>
+        <text class="s" x="258" y="174">buys day 3</text>
+        <circle class="dot" cx="475" cy="170" r="8"/>
+        <text class="s" x="475" y="202" text-anchor="middle">reward day 8</text>
+
+        <text class="t" x="24" y="244">Friend C</text>
+        <rect class="bar" x="286" y="229" width="210" height="22" rx="11"/>
+        <text class="s" x="300" y="244">buys day 4</text>
+        <circle class="dot" cx="517" cy="240" r="8"/>
+        <text class="s" x="517" y="270" text-anchor="middle">reward day 9</text>
+      </svg>
+      </div>
+      <div class="legend">
+        <span><i class="sw sw-bar"></i>5-day money-back period</span>
+        <span><i class="sw sw-dot"></i>Reward given: friend's plan extended, referrer's reward added</span>
+      </div>
+      <figcaption>The days shown are an example, not data.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="band" id="paths">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Every path</div>
+      <h2>What happens in <span class="hl">each case</span></h2>
+      <p>Ten paths cover everything a referrer or a friend can do. Each lists the steps in order and what each person ends up with.</p>
+    </div>
+    <div class="grid2">
+
+      <div class="card">
+        <div class="path-label">Path 1 &middot; Referrer shares</div>
+        <h3>A user shares their link</h3>
+        <ol class="steps">
+          <li>The user opens Refer and earn (R2) or sees a share prompt.</li>
+          <li>They copy or share their personal link (R3).</li>
+        </ol>
+        <div class="out"><p><b>Friend:</b> nothing yet.</p><p><b>Referrer:</b> nothing yet. The link is reusable and never expires.</p></div>
+      </div>
+
+      <div class="card">
+        <div class="path-label">Path 2 &middot; Main path</div>
+        <h3>An eligible friend buys and keeps the plan</h3>
+        <ol class="steps">
+          <li>The friend opens the link and sees the landing page with "[Name] referred you" (R4).</li>
+          <li>The friend enters their mobile number. The system finds they are new, on a free trial or lapsed, so they are eligible (R5).</li>
+          <li>The friend buys a Shvasa One 3-month or annual plan. The purchase summary shows their bonus. The purchase is credited to the link used at payment (R6, R7).</li>
+          <li>The 5-day money-back period runs. The friend does not refund.</li>
+          <li>On day 6 both rewards are given (R9).</li>
+        </ol>
+        <div class="out"><p><b>Friend:</b> plan extended by 2 weeks (3-month) or 1 month (annual), with Shvasa One credits added (R10).</p><p><b>Referrer:</b> one unclaimed reward of the same size in their account, claimable anytime (R11). Notified on WhatsApp (R17).</p></div>
+      </div>
+
+      <div class="card">
+        <div class="path-label">Path 3 &middot; Not eligible</div>
+        <h3>A paid member opens a link</h3>
+        <ol class="steps">
+          <li>They open the link and see the same landing page as everyone (R4).</li>
+          <li>They enter their mobile number. The system finds an active paid subscription.</li>
+          <li>They see: "Sorry, looks like you already have an active subscription with us." (R5)</li>
+        </ol>
+        <div class="out"><p><b>Friend:</b> not referred. No bonus.</p><p><b>Referrer:</b> nothing.</p></div>
+      </div>
+
+      <div class="card">
+        <div class="path-label">Path 4 &middot; Refund</div>
+        <h3>The friend refunds inside the 5 days</h3>
+        <ol class="steps">
+          <li>The friend buys through a link.</li>
+          <li>Within 5 days they ask for a refund, under the refund terms.</li>
+          <li>Day 6 never gives a reward (R14).</li>
+        </ol>
+        <div class="out"><p><b>Friend:</b> no bonus.</p><p><b>Referrer:</b> no reward.</p></div>
+      </div>
+
+      <div class="card">
+        <div class="path-label">Path 5 &middot; No purchase</div>
+        <h3>A friend opens the link and does not buy</h3>
+        <ol class="steps">
+          <li>The friend opens the link and leaves.</li>
+          <li>Nothing expires: not the link, not the offer (R3, R18).</li>
+          <li>If they buy later through the same link, path 2 starts from the purchase.</li>
+        </ol>
+        <div class="out"><p><b>Friend:</b> no new link is needed.</p><p><b>Referrer:</b> nothing until a purchase happens.</p></div>
+      </div>
+
+      <div class="card">
+        <div class="path-label">Path 6 &middot; Two links</div>
+        <h3>A friend opens links from two users</h3>
+        <ol class="steps">
+          <li>The friend opens user A's link, then user B's link.</li>
+          <li>They pay using B's link.</li>
+          <li>The purchase is credited to B (R7).</li>
+        </ol>
+        <div class="out"><p><b>Friend:</b> gets the bonus once, as in path 2.</p><p><b>Referrer A:</b> nothing. <b>Referrer B:</b> one reward.</p></div>
+      </div>
+
+      <div class="card">
+        <div class="path-label">Path 7 &middot; Several friends</div>
+        <h3>Many friends buy close together</h3>
+        <ol class="steps">
+          <li>Each friend's purchase starts its own 5-day wait (R13).</li>
+          <li>Each purchase reaches its own day 6 and gives its own reward.</li>
+          <li>Rewards appear in the referrer's account one after another.</li>
+        </ol>
+        <div class="out"><p><b>Friend:</b> as in path 2, each on their own day 6.</p><p><b>Referrer:</b> one unclaimed reward per qualifying friend. Each is claimed separately.</p></div>
+      </div>
+
+      <div class="card" style="grid-column: 1 / -1;">
+        <div class="path-label">Path 8 &middot; Claiming</div>
+        <h3>The referrer claims a reward</h3>
+        <ol class="steps">
+          <li>The referrer opens their referral page and sees their unclaimed rewards (R11).</li>
+          <li>They tap Claim on one reward. One tap claims one reward only.</li>
+          <li>The system checks their status and applies the reward as shown in the Claiming chart below (R12).</li>
+        </ol>
+        <div class="out">
+          <p><b>Active subscription (any plan):</b> the plan stays the same. Its end date moves out by the reward (also in the third-party app). Shvasa One credits are added. No credits of its own type (1:1, unlimited and so on) are added. It keeps renewing as the original plan, not as Shvasa One. If the user has several subscriptions, the primary one is extended.</p>
+          <p><b>Expired subscription:</b> a Shvasa One subscription is activated. It is a one-time plan and does not renew. [Length: equal to the reward, to confirm]</p>
+          <p><b>Active free trial:</b> the free trial is cancelled and a Shvasa One subscription is activated. Remaining trial credits expire because credits are not transferable. It is a one-time plan and does not renew. [Length: equal to the reward, to confirm]</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="path-label">Path 9 &middot; Account removed</div>
+        <h3>The referrer's account is deleted or blocked</h3>
+        <ol class="steps">
+          <li>The referrer has unclaimed rewards.</li>
+          <li>Their account is deleted or blocked before they claim.</li>
+          <li>The unclaimed rewards are removed (R16).</li>
+        </ol>
+        <div class="out"><p><b>Friend:</b> keeps their bonus.</p><p><b>Referrer:</b> loses the unclaimed rewards.</p></div>
+      </div>
+
+      <div class="card">
+        <div class="path-label">Path 10 &middot; Dispute</div>
+        <h3>A chargeback or dispute after day 6</h3>
+        <ol class="steps">
+          <li>Day 6 has passed and rewards were given.</li>
+          <li>The friend raises a chargeback or dispute.</li>
+          <li>Nothing is removed automatically. The team settles it case by case (R15).</li>
+        </ol>
+        <div class="out"><p><b>Friend and referrer:</b> rewards stay unless the team decides otherwise.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="band soft" id="claim">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Rule R12, shown</div>
+      <h2>What happens when a reward is <span class="hl">claimed</span></h2>
+      <p>The system checks the claimer's status at the moment of the tap. One tap claims one reward.</p>
+    </div>
+    <figure>
+      <div class="scroll-x">
+      <svg class="diagram" viewBox="0 0 820 424" role="img" aria-label="When a referrer claims a reward, an active paid subscription is extended with Shvasa One credits, an expired subscription gets a one-time Shvasa One plan, and an active free trial is cancelled and replaced by a one-time Shvasa One plan">
+        <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arrowhead"/></marker></defs>
+        <path class="edge" d="M190 215H213" marker-end="url(#a2)"/>
+        <path class="edge" d="M290 165V75H468" marker-end="url(#a2)"/>
+        <path class="edge" d="M365 215H468" marker-end="url(#a2)"/>
+        <path class="edge" d="M290 265V355H468" marker-end="url(#a2)"/>
+
+        <rect class="node" x="20" y="185" width="170" height="60" rx="10"/>
+        <text class="t" x="105" y="211" text-anchor="middle">Claim tapped</text>
+        <text class="s" x="105" y="229" text-anchor="middle">on one reward</text>
+
+        <polygon class="dia" points="215,215 290,165 365,215 290,265"/>
+        <text class="t" x="290" y="213" text-anchor="middle">Claimer's</text>
+        <text class="t" x="290" y="230" text-anchor="middle">status?</text>
+
+        <text class="tag" x="306" y="66">Paid: active subscription</text>
+        <text class="tag" x="416" y="207" text-anchor="middle">Lapsed: expired</text>
+        <text class="tag" x="306" y="346">Free trial: active</text>
+
+        <rect class="node-key" x="470" y="15" width="340" height="120" rx="10"/>
+        <text class="t" x="486" y="43">Extend the plan, add Shvasa One credits</text>
+        <text class="s" x="486" y="63">Plan stays the same, end date moves out by the reward</text>
+        <text class="s" x="486" y="81">No credits of its own type are added</text>
+        <text class="s" x="486" y="99">Keeps renewing as the original plan</text>
+        <text class="s" x="486" y="117">Several plans: the primary one is extended</text>
+
+        <rect class="node-key" x="470" y="170" width="340" height="90" rx="10"/>
+        <text class="t" x="486" y="198">Activate a one-time Shvasa One plan</text>
+        <text class="s" x="486" y="218">Does not renew</text>
+        <text class="s" x="486" y="236">Length = the reward [to confirm]</text>
+
+        <rect class="node-key" x="470" y="310" width="340" height="100" rx="10"/>
+        <text class="t" x="486" y="338">Cancel the trial, activate Shvasa One</text>
+        <text class="s" x="486" y="358">Remaining trial credits expire</text>
+        <text class="s" x="486" y="376">One-time plan, does not renew</text>
+        <text class="s" x="486" y="394">Length = the reward [to confirm]</text>
+      </svg>
+      </div>
+      <figcaption>The reward is 2 weeks for a friend's 3-month purchase and 1 month for an annual purchase. Credits are not transferable and expire when a subscription does.</figcaption>
+    </figure>
+
+    <div class="tbl">
+      <h3>Stacking, by type of user <span class="prop" style="margin-left:8px;">Proposed</span></h3>
+      <table>
+        <thead><tr><th>User</th><th>First claim</th><th>Each later claim</th></tr></thead>
+        <tbody>
+          <tr><td>Paid (active subscription)</td><td>The end date moves out by the reward.</td><td>The end date moves out again by that reward. Two rewards of 1 month and 2 weeks move it out by 1 month and 2 weeks in total.</td></tr>
+          <tr><td>Lapsed (expired)</td><td>A one-time Shvasa One plan is activated.</td><td>The user now has an active Shvasa One plan, so the claim extends it, as for a paid user. It still does not renew.</td></tr>
+          <tr><td>Free trial</td><td>The trial is cancelled and a one-time Shvasa One plan is activated.</td><td>Extends that plan, as for a paid user. It still does not renew.</td></tr>
+          <tr><td>Friend, on day 6</td><td>Their own reward extends the plan they just bought.</td><td>Rewards they claim later as a referrer extend the same plan while it is active.</td></tr>
+        </tbody>
+      </table>
+      <p class="small" style="margin-top:14px;">Status is checked at each tap. If a one-time plan has ended before the next claim, the user is lapsed again and that claim activates a new one-time plan.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="examples">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Worked examples</div>
+      <h2>The rules <span class="hl">in use</span></h2>
+      <p>Four examples with the exact outcome. Days are counted from the purchase day, which is day 1.</p>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="path-label">Example 1 &middot; Referrer has a private plan</div>
+        <p>A new friend buys the <strong>annual</strong> plan on day 1 through the link of a user on a private 10-pack, 2-month plan. No refund.</p>
+        <div class="out"><p><b>Day 6, friend:</b> annual plan extended by 1 month, Shvasa One credits added.</p><p><b>Day 6, referrer:</b> one unclaimed reward of 1 month.</p><p><b>When claimed:</b> the private plan keeps its 10 1:1 credits, runs 1 month longer, gets Shvasa One credits, and keeps renewing as a private plan.</p></div>
+      </div>
+      <div class="card">
+        <div class="path-label">Example 2 &middot; Refund</div>
+        <p>A friend buys the <strong>3-month</strong> plan on day 1 and refunds on day 4.</p>
+        <div class="out"><p><b>Day 6, friend:</b> no bonus.</p><p><b>Day 6, referrer:</b> no reward.</p></div>
+      </div>
+      <div class="card">
+        <div class="path-label">Example 3 &middot; Referrer's plan has expired</div>
+        <p>A friend buys the <strong>3-month</strong> plan on day 1 through the link of a user whose subscription expired. No refund.</p>
+        <div class="out"><p><b>Day 6, friend:</b> plan extended by 2 weeks.</p><p><b>Day 6, referrer:</b> one unclaimed reward of 2 weeks.</p><p><b>When claimed:</b> a one-time Shvasa One subscription is activated. It does not renew.</p></div>
+      </div>
+      <div class="card">
+        <div class="path-label">Example 4 &middot; Referrer is on a free trial</div>
+        <p>A friend buys the <strong>annual</strong> plan on day 1 through the link of a user on an active free trial. No refund.</p>
+        <div class="out"><p><b>Day 6, friend:</b> annual plan extended by 1 month.</p><p><b>Day 6, referrer:</b> one unclaimed reward of 1 month.</p><p><b>When claimed:</b> the free trial is cancelled, remaining trial credits expire, and a one-time Shvasa One subscription is activated. It does not renew.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band soft" id="edges">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Edge cases</div>
+      <h2>Other cases and <span class="hl">known risks</span></h2>
+      <p>Cases not covered by a path, and what is still open.</p>
+    </div>
+    <div class="tbl" style="margin-top:0;">
+      <table>
+        <thead><tr><th>Situation</th><th>How it is handled</th></tr></thead>
+        <tbody>
+          <tr><td>Link shared publicly or misused</td><td>Links are meant to be shared publicly. A link can still be switched off if misused.</td></tr>
+          <tr><td>Paused plans, YTT, private packages</td><td>Not an issue. Every plan has a clear end date, and paused days are finite and stated by the user.</td></tr>
+          <tr><td>Credits left over</td><td>Credits are not transferable and expire when the subscription does.</td></tr>
+          <tr><td>Family and Friends, Duo, couples</td><td>Each member needs their own account. Payments are made separately but can use the same payment method every time.</td></tr>
+          <tr><td>Support tool to grant or remove rewards</td><td>Not required now.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="strip">
+      <p><strong>Known risk.</strong> Ideally a friend whose mobile number, payment ID or device matches the referrer's would be invalid, but this is not built now. Because family members can legitimately share a payment method, a match alone is not proof of abuse.</p>
+      <p><strong>To confirm.</strong> (1) Day counting: purchase day is day 1 and the money-back period is days 1 to 5. (2) The length of the one-time Shvasa One plan for expired and free-trial users. (3) How the renewal date moves when an auto-renewing subscription is extended. (4) Whether a paid member who is stopped by the mobile check can still buy Shvasa One at the normal price. (5) How a link is switched off, and whether the off button covers the whole system or single links. (6) The WhatsApp events to notify. (7) Event logging (FR-14), not yet raised with the CTO. (8) Stacking (R19): whether any limit is wanted, since many referrals could add up to a long free period.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="requirements">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Scope for engineering</div>
+      <h2>What we need to <span class="hl">build</span></h2>
+      <p>One line per requirement. The logic sits in the rules (R1 to R18) above.</p>
+    </div>
+    <div class="grid2">
+      <div class="card req-card">
+        <h3>Entry point and link</h3>
+        <ul class="req">
+          <li><span class="fr">FR-1</span><span>Refer and earn entry point on website, app and mobile website, hidden outside India (R2).</span></li>
+          <li><span class="fr">FR-2</span><span>A referral page that explains the offer in plain words.</span></li>
+          <li><span class="fr">FR-3</span><span>One automatic, permanent personal link per user, which can be switched off (R3).</span></li>
+          <li><span class="fr">FR-4</span><span>Landing page banner "[Name] referred you" (R4).</span></li>
+          <li><span class="fr">FR-5</span><span>Mobile number eligibility check and the paid-member message (R5).</span></li>
+        </ul>
+      </div>
+      <div class="card req-card">
+        <h3>Purchase</h3>
+        <ul class="req">
+          <li><span class="fr">FR-6</span><span>Credit a qualifying purchase to the link used at payment (R6, R7).</span></li>
+          <li><span class="fr">FR-7</span><span>Show the friend's bonus on the purchase summary.</span></li>
+        </ul>
+        <h3 style="margin-top:14px;">Operations</h3>
+        <ul class="req">
+          <li><span class="fr">FR-14</span><span>Log link opened, purchase made, refund inside the window, reward given and reward claimed.</span></li>
+          <li><span class="fr">FR-15</span><span>WhatsApp notifications through WATI, including lapsed users (R17).</span></li>
+          <li><span class="fr">FR-16</span><span>An off button for the referral system.<span class="prop">Proposed</span> [Whole system or single links: to confirm]</span></li>
+          <li><span class="fr">FR-17</span><span>In the cancel flow, tell the user they can earn free Shvasa One time by referring a friend.<span class="prop">Proposed</span> [Fit with the cancel flow: to confirm]</span></li>
+        </ul>
+      </div>
+      <div class="card req-card" style="grid-column: 1 / -1;">
+        <h3>Rewards</h3>
+        <ul class="req" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px 32px;">
+          <li><span class="fr">FR-8</span><span>Reward sizes by plan (R8).</span></li>
+          <li><span class="fr">FR-9</span><span>A day 6 rule that checks for a refund and extends the friend's plan (R9, R10).</span></li>
+          <li><span class="fr">FR-10</span><span>Unclaimed reward list per referrer, one Claim button each, removed if the account is deleted or blocked (R11, R16).</span></li>
+          <li><span class="fr">FR-11</span><span>Apply a claimed reward by status: active subscription, expired, free trial (path 8).</span></li>
+          <li><span class="fr">FR-12</span><span>Independent 5-day waits per purchase (R13).</span></li>
+          <li><span class="fr">FR-13</span><span>Referral page showing each friend's status, rewards and the Claim action. Layout is designed in a separate chat; this page is its guide.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band soft" id="sources">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Reference</div>
+      <h2>Patterns from other programs</h2>
+    </div>
+    <div class="refs">
+      <p><strong>Habuild.</strong> The only page found is a third-party growth write-up of a <em>proposed</em> referral engine, not Habuild's own confirmed flow. It describes prompting users after 7, 14 or 21 days of consistent practice, sharing a personal link by WhatsApp, an in-app tracker of friends invited and joined, and rewards that unlock with referral counts. <a href="https://growthx.club/proof-of-work/health-wellness-and-fitness/habuild/acquisition-project-----habuild%7C681199d5add9e38ea69b064d">GrowthX write-up</a></p>
+      <p><strong>Capped repeat rewards.</strong> Tesla's FSD referral gives the friend a free month and rewards the referrer when the friend subscribes, up to 12 times per calendar year. <a href="https://www.notateslaapp.com/news/4923/teslas-new-fsd-referral-program-is-live-how-it-works">Not a Tesla App</a></p>
+      <p><strong>Uncapped repeat rewards.</strong> YNAB gives both sides a free month when the friend subscribes, with no limit on months. <a href="https://www.ynab.com/referral-program">YNAB</a></p>
+      <p><strong>Abuse control.</strong> Guides recommend holding rewards until a payment or engagement milestone, capping referrals per customer, and using rewards that are easy to reverse. <a href="https://www.prefinery.com/blog/referral-fraud-types-and-prevention/">Prefinery</a>, <a href="https://get.talkable.com/blog/smart-strategies-for-preventing-fraud-in-your-customer-referral-program">Talkable</a>, <a href="https://www.nofraud.com/?p=460">NoFraud</a></p>
+      <p class="small">As of 4 November 2026. Habuild's live referral flow has not been verified. Searches on TechCrunch, VentureBeat, HackerNoon and the Netflix, Stripe and OpenAI blogs returned nothing on referral mechanics. Effect-size claims from vendor blogs could not be verified and are left out.</p>
+    </div>
+  </div>
+</section></main>
+
+<footer class="band">
+  <div class="wrap">Shvasa One Referral System. Updated 5 November 2026. Anything marked "to confirm" or "to be set" is undecided.</div>
+</footer>
+
+</body></html>
